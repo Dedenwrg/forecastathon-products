@@ -1,0 +1,67 @@
+{
+  "product": {
+    "base": {
+      "metadata": {
+        "builder": "0x713676A89d2Fc5F5058EeF3E00B2796B8D2B1166",
+        "symbol": "SBPATRIOTS26",
+        "description": "New England Patriots win Super Bowl LX (Feb 2026, 2025 NFL season)"
+      },
+      "oracleSpec": {
+        "oracleAddress": "0x06CaDDDf6CC08048596aE051c8ce644725219C73",
+        "fsvDecimals": 0,
+        "fspAlpha": "1.0",
+        "fspBeta": "0.0",
+        "fsvCalldata": "0x"
+      },
+      "collateralAsset": "0xAE2C6c29F6403fDf5A31e74CC8bFd1D75a3CcB8d",
+      "startTime": "2026-01-30T18:30:00Z",
+      "pointValue": "1.0",
+      "priceDecimals": 2,
+      "extendedMetadata": null
+    },
+    "expirySpec": {
+      "earliestFSPSubmissionTime": "2026-02-08T23:59:00Z",
+      "tradeoutInterval": 0
+    },
+    "minPrice": "0",
+    "maxPrice": "1"
+  },
+  "outcome_space": {
+    "fsp_type": "ternary",
+    "description": "Who will win Super Bowl LX (Feb 2026, 2025 NFL season)?",
+    "outcome_statement": "{outcome} wins Super Bowl LX (Feb 2026, 2025 season)",
+    "base_case": {
+      "condition": "{outcome}",
+      "fsp_resolution": "FSP=1 if {outcome} is declared Super Bowl champion by the NFL (evaluates to TRUE). FSP=0.5 if the competition is cancelled/abandoned with no champion adjudicated and {outcome} has not been officially eliminated/forfeited (evaluates to UNRESOLVED). FSP=0 if the champion is a different team or {outcome} is officially eliminated/forfeits (evaluates to FALSE). Data sources: Primary <https://www.nfl.com/scores>; Secondary <https://apnews.com/hub/nfl>."
+    },
+    "edge_cases": [
+      {
+        "condition": "The competition is cancelled/abandoned at any stage with no champion adjudicated, and {outcome} has not been officially eliminated/forfeited.",
+        "fsp_resolution": "FSP=0.5 (evaluates to UNRESOLVED) - there is no formally adjudicated Super Bowl champion. Data sources: Primary <https://www.nfl.com/scores>; Secondary <https://apnews.com/hub/nfl>."
+      },
+      {
+        "condition": "{outcome} is officially eliminated/forfeits (at any stage), regardless of later cancellation status.",
+        "fsp_resolution": "FSP=0 (evaluates to FALSE) - {outcome} did not win the Super Bowl. Data sources: Primary <https://www.nfl.com/scores>; Secondary <https://apnews.com/hub/nfl>."
+      }
+    ],
+    "expected_resolution_date": "2026-02-08",
+    "category": "sport",
+    "tags": [
+      "NFL",
+      "Super Bowl",
+      "2025 season"
+    ]
+  },
+  "outcome_point": {
+    "fsp_type": "ternary",
+    "outcome": "New England Patriots"
+  },
+  "oracle_config": {
+    "description": "Manual oracle system for product settlement",
+    "project_url": null
+  },
+  "oracle_fallback": {
+    "fallback_time": "2026-02-15T23:59:00Z",
+    "fallback_fsp": "0.5"
+  }
+}
