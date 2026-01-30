@@ -1,0 +1,68 @@
+{
+  "product": {
+    "base": {
+      "metadata": {
+        "builder": "0x241c9F1BE139C8772dd0aAFb27AD6E9f19C81939",
+        "symbol": "COE2H26",
+        "description": "Singapore Cat A Certificate of Entitlement Mar 2026 Bidding 2"
+      },
+      "oracleSpec": {
+        "oracleAddress": "0x06CaDDDf6CC08048596aE051c8ce644725219C73",
+        "fsvDecimals": 3,
+        "fspAlpha": "0.001",
+        "fspBeta": "0.0",
+        "fsvCalldata": "0x"
+      },
+      "collateralAsset": "0xAE2C6c29F6403fDf5A31e74CC8bFd1D75a3CcB8d",
+      "startTime": "2026-03-01T00:00:01Z",
+      "pointValue": "1",
+      "priceDecimals": 3,
+      "extendedMetadata": "bafyreiboney7xjdolyaspmlqk5twqcpetalmarsty5lal3qcskz36lhnni"
+    },
+    "expirySpec": {
+      "earliestFSPSubmissionTime": "2026-03-18T08:00:00Z",
+      "tradeoutInterval": 3600
+    },
+    "minPrice": "95",
+    "maxPrice": "120"
+  },
+  "outcome_space": {
+    "fsp_type": "scalar",
+    "description": "Singapore Certificate of Entitlement for non-fully electric cars with engines up to 1,600cc and 130bhp",
+    "base_case": {
+      "condition": "What will the Category A COE premium quota be on 18 Mar 2026?",
+      "fsp_resolution": "FSP equals the lowest successful bid price for {reference_date} as published by the Land Transport Authority of Singapore on the One Motoring site."
+    },
+    "edge_cases": [
+      {
+        "condition": "One Motoring site does not publish the official COE auction result by 6 Apr 2026",
+        "fsp_resolution": "FSP is UNRESOLVED"
+      }
+    ],
+    "frequency": "semimonthly",
+    "units": "SGD",
+    "source_name": "Land Transport Authority",
+    "source_uri": "https://onemotoring.lta.gov.sg/content/onemotoring/home/buying/coe-open-bidding.html"
+  },
+  "outcome_point": {
+    "fsp_type": "scalar",
+    "observation": {
+      "reference_date": "2026-03-18",
+      "release_date": "2026-03-18"
+    }
+  },
+  "oracle_config": {
+    "description": "Oracle Configuration for COE Category A",
+    "project_url": null,
+    "evaluation_api_spec": {
+      "standard": "JSONPath",
+      "url": "https://data.gov.sg/api/action/datastore_search?resource_id=d_69b3380ad7e51aff3a7dcc84eba52b8a&filters={\"vehicle_class\":[\"Category+A\"]}&columns=quota,premium&sort=month desc&limit=10",
+      "date_path": "$..result.records[?(@.month=='2026-03' && @.bidding_no=='2')]._id",
+      "value_path": "$..result.records[?(@.month=='2026-03' && @.bidding_no=='2')].premium"
+    }
+  },
+  "oracle_fallback": {
+    "fallback_fsp": "109.501",
+    "fallback_time": "2026-04-06T08:00:00Z"
+  }
+}
