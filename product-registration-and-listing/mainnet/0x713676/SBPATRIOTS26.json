@@ -9,8 +9,8 @@
       "oracleSpec": {
         "oracleAddress": "0x06CaDDDf6CC08048596aE051c8ce644725219C73",
         "fsvDecimals": 0,
-        "fspAlpha": "0.0",
-        "fspBeta": "1.0",
+        "fspAlpha": "1.0",
+        "fspBeta": "0.0",
         "fsvCalldata": "0x"
       },
       "collateralAsset": "0xAE2C6c29F6403fDf5A31e74CC8bFd1D75a3CcB8d",
