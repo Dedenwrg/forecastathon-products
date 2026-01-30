@@ -14,8 +14,8 @@ See the [root README](../README.md#product-requirements) for full requirements. 
 | `collateralAsset` | `0xDEfAaC81a079533Bf2fb004c613cc2870cF0A5b5` | `0xAE2C6c29F6403fDf5A31e74CC8bFd1D75a3CcB8d` |
 
 - `builder` must be a registered Forecastathon participant
-- `startTime` must be at least **two full working days** after PR contribution
-- Extended metadata must be pinned on IPFS and conform to expected schemas
+- `startTime` should be at least **two full working days** after PR contribution
+- Extended metadata must conform to expected schemas (pinning is handled automatically by the workflow)
 
 ## Folder Structure
 
@@ -25,10 +25,10 @@ See the [root README](../README.md#product-requirements) for full requirements. 
 ## Process
 
 1. Choose the appropriate environment folder (`bakerloo/` or `mainnet/`)
-2. Create a folder named after the first six characters of your builder ID (e.g. `0x1234ab/`)
-3. Create a file named `<PRODUCT_SYMBOL>.json` (e.g. `USCPI-MAR26.json`)
-4. The file should contain the complete product specification and extended metadata
-5. Create a branch using the format `<first-six-characters-of-builder-id>-<symbol>-<network>` (e.g. `0x123456-BTCVOL51W25-mainnet`)
+2. Create a branch using the format `<first-six-characters-of-builder-id>-<symbol>-<network>` (e.g. `0x123456-BTCVOL51W25-mainnet`)
+3. Create a folder named after the first six characters of your builder ID (e.g. `0x1234ab/`)
+4. Create a file named `<PRODUCT_SYMBOL>.json` (e.g. `BTCVOL51W25.json`)
+5. The file should contain the complete product specification and extended metadata. Note: the `extendedMetadata` field can be omitted or set to `null` as it will be automatically generated when the workflow pins to IPFS.
 6. Open a pull request against `main`
 7. Ensure all validation checks pass
 8. If approved, the AFP team will register your product and list it on the Autex

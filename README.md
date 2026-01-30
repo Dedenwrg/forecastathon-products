@@ -20,7 +20,7 @@ For a product to be listed on the Autex, it must satisfy the following requireme
 ### Validation Checks
 
 - `builder` must be a registered participant in the [Forecastathon](https://forecastathon.ai/join-now)
-- `startTime` must be at least **two full working days** after PR contribution
+- `startTime` should be at least **two full working days** after PR contribution
 - Extended metadata must be pinned on IPFS
 - Extended metadata must conform to the expected schemas
 - API source (if applicable) must be valid and freely accessible
@@ -70,10 +70,23 @@ The AFP-SDK will use this token to pin your extended metadata when creating prod
 
 ### Validate a Product Locally
 
+The validation script supports two modes:
+
+**Pre-registration validation** (validate a product specification JSON file):
+
 ```bash
-export AUTONITY_RPC_URL="https://bakerloo.autonity-apis.com"
-export EXCHANGE_URL="https://exchange-server-next.up.railway.app"
+export AUTONITY_RPC_URL="https://rpc1.bakerloo.autonity.org"
 export VALIDATION_PRIVATE_KEY="your_private_key"
+
+python scripts/validate.py path/to/product_spec.json
+```
+
+**Post-registration validation** (validate an on-chain product):
+
+```bash
+export AUTONITY_RPC_URL="https://rpc1.bakerloo.autonity.org"
+export VALIDATION_PRIVATE_KEY="your_private_key"
+export EXCHANGE_URL="https://exchange-server-next.up.railway.app"
 export IPFS_API_URL="https://rpc.filebase.io"
 export IPFS_API_KEY="your_filebase_token"
 
@@ -98,11 +111,10 @@ python scripts/validate.py <product_id>
 
 **Pre-requisite**: You must be a participant in the [Forecastathon](https://forecastathon.ai/join-now)
 
-1. Using the [AFP SDK](https://pypi.org/project/afp-sdk/), construct a valid product specification using the required `oracleAddress` and `collateralAsset` from the table above.
+1. Using the [AFP SDK](https://pypi.org/project/afp-sdk/), construct a valid product specification using the required `oracleAddress` and `collateralAsset` from the table above. Note: the `extendedMetadata` field can be omitted or set to `null` as it will be automatically generated when the workflow pins to IPFS.
 2. Generate an extended metadata structure using the SDK and ensure it conforms to the expected schemas.
-3. Pin the extended metadata on IPFS via any pinning service. The AFP-SDK offers native pinning via Filebase, but any service can be used.
-4. Open a PR against this repo, contributing to the `product-registration-and-listing` folder the complete product details (product specification and extended metadata). Please ensure the configured builder ID is your Forecastathon participant address as scores will be associated with this account. Name the file the same as your Product Symbol (e.g. `USCPI-MAR26.json`) and place it in a subfolder named after the first six characters of your builder ID (e.g. `0x123456`). Name your branch using the format `<builder-id-prefix>-<symbol>-<network>` (e.g. `0x1234-USCPI-MAR26-mainnet`).
-5. If all checks pass, your product will be registered by the AFP team, and automatically listed on the Autex.
+3. Open a PR against this repo, contributing to the `product-registration-and-listing` folder the complete product details (product specification and extended metadata). Please ensure the configured builder ID is your Forecastathon participant address as scores will be associated with this account. Name the file the same as your Product Symbol (e.g. `BTCVOL51W25.json`) and place it in a subfolder named after the first six characters of your builder ID (e.g. `0x123456`). Name your branch using the format `<first-six-characters-of-builder-id>-<symbol>-<network>` (e.g. `0x123456-BTCVOL51W25-mainnet`).
+4. If all checks pass, your product will be registered by the AFP team (including IPFS pinning), and automatically listed on the Autex.
 
 ### Which Path Should I Choose?
 
@@ -146,7 +158,7 @@ For products that are **already registered on-chain** and just need to be listed
 - Validates JSON structure
 - Validates extended metadata conforms to schema
 
-**On Merge to Master:**
+**On Merge to Main:**
 
 - Lists and reveals product on the Autex
 
@@ -159,7 +171,7 @@ For products that need to be **registered on-chain first**, then listed on the A
 - Validates JSON structure
 - Validates extended metadata conforms to schema
 
-**On Merge to Master:**
+**On Merge to Main:**
 
 - Pins extended metadata to IPFS
 - Registers product on-chain
