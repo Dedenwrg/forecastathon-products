@@ -12,6 +12,10 @@ on:
       - 'product-registration-and-listing/bakerloo/**'
       - 'product-registration-and-listing/mainnet/**'
 
+env:
+  MAINNET_SDK_VERSION: "0.6.0"
+  BAKERLOO_SDK_VERSION: "0.6.0-rc.9"
+
 jobs:
   detect-environment:
     runs-on: ubuntu-latest
@@ -87,9 +91,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ "${{ needs.detect-environment.outputs.environment }}" == "Bakerloo" ]; then
-            pip install git+https://github.com/autonity/afp-sdk@v0.6.0-rc.9 psycopg2-binary
+            pip install git+https://github.com/autonity/afp-sdk@v${{ env.BAKERLOO_SDK_VERSION }} psycopg2-binary
           else
-            pip install afp-sdk==0.6.0 psycopg2-binary
+            pip install afp-sdk==${{ env.MAINNET_SDK_VERSION }} psycopg2-binary
           fi
 
       - name: Display environment
@@ -136,9 +140,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ "${{ needs.detect-environment.outputs.environment }}" == "Bakerloo" ]; then
-            pip install git+https://github.com/autonity/afp-sdk@v0.6.0-rc.9
+            pip install git+https://github.com/autonity/afp-sdk@v${{ env.BAKERLOO_SDK_VERSION }}
           else
-            pip install afp-sdk==0.6.0
+            pip install afp-sdk==${{ env.MAINNET_SDK_VERSION }}
           fi
 
       - name: Register and list products
