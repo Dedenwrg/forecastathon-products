@@ -9,7 +9,7 @@
             "oracleSpec": {
                 "oracleAddress": "0x06CaDDDf6CC08048596aE051c8ce644725219C73",
                 "fsvDecimals": 2,
-                "fspAlpha": "0.001",
+                "fspAlpha": "1",
                 "fspBeta": "0.0",
                 "fsvCalldata": "0x"
             },
