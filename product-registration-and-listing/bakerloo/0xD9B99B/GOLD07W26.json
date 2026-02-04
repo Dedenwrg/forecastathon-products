@@ -23,8 +23,8 @@
             "earliestFSPSubmissionTime": "2026-02-13T16:00:00Z",
             "tradeoutInterval": 3600
         },
-        "minPrice": "4500.00",
-        "maxPrice": "5500.00"
+        "minPrice": "4000.00",
+        "maxPrice": "6000.00"
     },
     "outcome_space": {
         "fsp_type": "scalar",
@@ -72,8 +72,8 @@
         "evaluation_api_spec": {
             "standard": "JSONPath",
             "url": "https://api.db.nomics.world/v22/series/LBMA/gold_D/gold_D_USD_PM?observations=true",
-            "date_path": "$.series.docs[0].period[-1]",
-            "value_path": "$.series.docs[0].value[-1]",
+            "date_path": "$.series.docs[0].period",
+            "value_path": "$.series.docs[0].value",
             "headers": null,
             "timezone": "UTC",
             "date_format_type": "iso_8601",
