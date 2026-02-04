@@ -72,8 +72,8 @@
         "evaluation_api_spec": {
             "standard": "JSONPath",
             "url": "https://api.db.nomics.world/v22/series/LBMA/gold_D/gold_D_USD_PM?observations=true",
-            "date_path": "$.series.docs[0].period[-1]",
-            "value_path": "$.series.docs[0].value[-1]",
+            "date_path": "$.series.docs[0].period",
+            "value_path": "$.series.docs[0].value",
             "headers": null,
             "timezone": "UTC",
             "date_format_type": "iso_8601",
