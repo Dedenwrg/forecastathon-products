@@ -42,7 +42,7 @@
   },
   "outcome_point": {
     "fsp_type": "binary",
-    "outcome": "YES"
+    "outcome": "Truncated max sample of Solana Price reported by CoinGecko is >= 120.00 USD."
   },
   "oracle_config": {
     "description": "Automated oracle: fetch Solana USD prices from CoinGecko over a fixed 24h UTC window, compute max over returned samples, truncate to 2 decimals, then compare against 120.00.",
